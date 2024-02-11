@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #8a2be2; /* Ljubičasta boja pozadine */
+            padding: 50px;
+            color: #ffffff; /* Bela boja teksta */
+        }
+        #container {
+            position: relative;
+        }
+        #heart {
+            font-size: 200px; /* Povećana veličina srca */
+            color: rgba(255, 0, 0, 0.5); /* Providna crvena boja srca */
+            position: relative;
+            left: -10px; /* Pomeranje srca na levo */
+        }
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            font-size: 18px; /* Smanjena veličina teksta */
+        }
+        button {
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="heart">&#10084;</div>
+        <h1>Ana, jel bi bila možda moj valentine?</h1>
+    </div>
+    <button onclick="checkAnswer('Da')">Da</button>
+    <button onclick="checkAnswer('Ne')">Ne</button>
+    <p id="result"></p>
+
+    <script>
+        let attempts = 0;
+
+        function checkAnswer(answer) {
+            if (attempts === 0) {
+                if (answer === 'Da') {
+                    document.getElementById('result').innerHTML = 'TOOO BRE! VOLIM TE&lt;3';
+                } else if (answer === 'Ne') {
+                    document.getElementById('result').innerHTML = 'Alo bre, pogrešan odgovor.';
+                    attempts++;
+                }
+            } else if (attempts === 1) {
+                if (answer === 'Ne') {
+                    document.getElementById('result').innerHTML = 'Poslednja šansa';
+                    document.querySelectorAll('button').forEach(button => {
+                        button.innerHTML = 'Da';
+                        button.setAttribute('onclick', "checkAnswer('Da')");
+                    });
+                    attempts++;
+                } else if (answer === 'Da') {
+                    document.getElementById('result').innerHTML = 'E tako volim i ja tebe!';
+                }
+            } else if (attempts === 2) {
+                if (answer === 'Da' || answer === 'Ne') {
+                    document.getElementById('result').innerHTML = 'Nema ne bre moja si. Ccc Ana, razočarala si me, ali i dalje te volim MWAH!';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
